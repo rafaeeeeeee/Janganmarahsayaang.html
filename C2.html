@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for nabila(jangan marah yaa)</title>
+    <style>
+        body {
+            background-color: #ffe6e6; /* Warna pink muda */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff3b3f;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .intro-text {
+            color: #ff3b3f;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .question-text {
+            color: #ff3b3f;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .button-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .heart-btn {
+            padding: 12px 25px;
+            background-color: #ff3b3f;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .heart-btn:hover {
+            background-color: #ff6f61;
+            transform: scale(1.1);
+        }
+
+        .message {
+            margin-top: 20px;
+            color: #ff3b3f;
+            font-size: 2em;
+            display: none;
+            animation: wave 2s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        .grow {
+            transition: transform 0.5s ease;
+        }
+
+        /* Smooth move */
+        #noBtn {
+            transition: left 0.5s ease, top 0.5s ease;
+        }
+
+        /* Responsif */
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .heart-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .message {
+                font-size: 1.8em;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="introText" class="intro-text">
+        Haii sayang, bolehkah aku minta waktunya sebentar?
+    </div>
+
+    <div id="questionText" class="question-text">
+        Maukah kamu menjadi valentine abadiku?
+    </div>
+
+    <div class="button-container" id="buttonContainer">
+        <button class="heart-btn grow" id="yesBtn" onclick="showMessage()">MAUU</button>
+        <button class="heart-btn grow" id="noBtn" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">TIDAK</button>
+    </div>
+
+    <div class="message" id="message" style="display: none;">
+        LETS GOOO NGENSKUYYYY AVV AVV
+    </div>
+
+    <!-- Pilihan kedua muncul setelah klik tombol pertama -->
+    <div class="button-container" id="secondChoice" style="display: none; margin-top: 30px;">
+        <button class="heart-btn grow" onclick="chooseOption('')">ODAITA</button>
+        <button class="heart-btn grow" onclick="chooseOption('')">FRONTONE AZANA</button>
+    </div>
+
+    <div class="message" id="poeticMessage" style="display: none; font-size: 1.8em; color: #ff3b3f; margin-top: 20px;">
+        Hehehe becanda kok sayang <br> 
+        maaf sayang udah ngeprank kamu <br>
+        aku hanya ingin berterimakasih telah datang di kehidupanku <br>
+        I LOVE YOU SAYANG ❤️ RAFAEL
+    </div>
+
+    <script>
+        let introText = document.getElementById('introText');
+        let questionText = document.getElementById('questionText');
+        let buttonContainer = document.getElementById('buttonContainer');
+        let secondChoice = document.getElementById('secondChoice');
+        let poeticMessage = document.getElementById('poeticMessage');
+
+        function showMessage() {
+            buttonContainer.style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+
+            // Menampilkan pilihan kedua lebih cepat
+            setTimeout(() => {
+                secondChoice.style.display = 'flex';
+            }, 1000);
+        }
+
+        function moveNoButton() {
+            const randomX = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        }
+
+        function chooseOption(message) {
+            document.getElementById('message').textContent = message;
+            secondChoice.style.display = 'none';
+
+            // Setelah 1 detik, tampilkan pesan puitis cinta
+            setTimeout(() => {
+                poeticMessage.style.display = 'block';
+            }, 500);
+        }
+
+        // Setelah 2 detik, intro hilang dan teks pertanyaan muncul
+        setTimeout(() => {
+            introText.style.display = 'none';
+            questionText.style.display = 'block';
+            setTimeout(() => {
+                questionText.style.display = 'none';
+                buttonContainer.style.display = 'flex';
+            }, 2000);
+        }, 2000);
+    </script>
+
+</body>
+</html>
